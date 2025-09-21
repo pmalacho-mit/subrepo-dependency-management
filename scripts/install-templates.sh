@@ -14,6 +14,12 @@ if ! command -v curl >/dev/null 2>&1; then
   echo "Error: curl is not installed." >&2; exit 1
 fi
 
+if ! git subrepo --version >/dev/null 2>&1; then
+  echo "Error: 'git subrepo' is not available. Install git-subrepo and ensure it's on PATH." >&2
+  echo "       See: https://github.com/ingydotnet/git-subrepo" >&2
+  exit 1
+fi
+
 echo "[2/9] Verifying we are inside a Git repository..."
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Error: not inside a Git repository." >&2; exit 1
@@ -87,5 +93,21 @@ fi
 
 echo "[8/9] Returning to 'main'..."
 git checkout -q main
+
+# --- git subrepo clone of dist into ./dist on main ---
+echo "[9/11] Getting origin URL..."
+ORIGIN_URL="$(git remote get-url origin 2>/dev/null || true)"
+if [[ -z "$ORIGIN_URL" ]]; then
+  echo "Error: could not find 'origin' remote URL." >&2
+  exit 1
+fi
+
+echo "[10/11] Cloning 'dist' branch into ./dist via git subrepo..."
+# Safety: avoid clobbering an existing non-empty ./dist directory
+if [[ -d "dist" && -n "$(ls -A dist 2>/dev/null)" ]]; then
+  echo "Error: './dist' already exists and is not empty. Remove it or choose another directory before running." >&2
+  exit 1
+fi
+git subrepo clone --branch=dist "$ORIGIN_URL" dist
 
 echo "[9/9] Done."
