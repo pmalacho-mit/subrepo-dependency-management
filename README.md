@@ -15,26 +15,12 @@ A workflow that relies on [git-subrepo](https://github.com/ingydotnet/git-subrep
 
 ### Creating a Dependency
 
+Relies on the [install-templates.sh]() script, which assumes that you've already `cd`d into the repository that willl contain your dependency. 
+
 ```bash
 git clone ...your repo url...
 cd ..your repo...
-git checkout main
-curl -L \
-  https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/templates/main/.devcontainer/devcontainer.json \
-  -o ./.devcontainer/devcontainer.json
-curl -L \
-  https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/templates/main/.github/workflows/subrepo-push-dist.yml \
-  -o ./.github/workflows/subrepo-push-dist.yml
-git add ./.devcontainer/devcontainer.json ./.github/workflows/subrepo-push-dist.yml
-git commit -m "Adding gitsubrepo dependency management supporting files (main)"
-git push
-git checkout --orphan dist
-curl -L \
-  https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/templates/dist/.github/workflows/subrepo-pull-into-main.yml \
-  -o ./.github/workflows/subrepo-pull-into-main.yml
-git add ./.github/workflows/subrepo-pull-into-main.yml
-git commit -m "Adding gitsubrepo dependency management supporting files (main)"
-git push
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/scripts/install-templates.sh)"
 ```
 
 Update github action permissions
