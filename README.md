@@ -15,7 +15,7 @@ A workflow that relies on [git-subrepo](https://github.com/ingydotnet/git-subrep
 
 ### Creating a Dependency
 
-Relies on the [install-templates.sh]() script, which assumes that you've already `cd`d into the repository that willl contain your dependency. 
+Relies on the [install-templates.sh](https://github.com/pmalacho-mit/subrepo-dependency-management/blob/main/scripts/install-templates.sh) script, which assumes that you've already `cd`d into the repository that willl contain your dependency. 
 
 ```bash
 git clone ...your repo url...
