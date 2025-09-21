@@ -4,7 +4,8 @@ A workflow that relies on [git-subrepo](https://github.com/ingydotnet/git-subrep
 
 ## Stack
 
-- [git]:
+In addition to [git](https://git-scm.com/)...
+
 - [git-subrepo](https://github.com/ingydotnet/git-subrepo): Enables us to more easily include git repositories as project dependencies (as compared to [git submodules](https://www.atlassian.com/git/tutorials/git-submodule) and/or [subtrees](https://www.atlassian.com/git/tutorials/git-subtree))  
 - [devcontainer](https://containers.dev/): Enables us to easily spin up a development environment that has [git-subrepo](https://github.com/ingydotnet/git-subrepo) installed.
 - [github actions](https://github.com/features/actions): Enables us to keep our remote subrepo dependency branches (`main` and `dist`) up to date.
@@ -25,4 +26,7 @@ A workflow that relies on [git-subrepo](https://github.com/ingydotnet/git-subrep
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/scripts/install-templates.sh)"
 ```
 
-Update github action permissions
+Update your repository's github action permissions (⚙️ Settings > ▶️ Actions > General) to enable:
+- Read and write permissions
+- Allow GitHub Actions to create and approve pull requests
+<img width="759" height="343" alt="Screenshot 2025-09-21 at 3 15 46 PM" src="https://github.com/user-attachments/assets/e4f1285d-e9dd-4a52-8f52-8c8250fee33b" />
