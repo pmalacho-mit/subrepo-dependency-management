@@ -16,7 +16,7 @@ A workflow that relies on [git-subrepo](https://github.com/ingydotnet/git-subrep
 ### Creating a Dependency
 
 1. If you haven't already, fork [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) and configure it as a template (see [Creating a template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)). 
-2. Create a new repository using your [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) fork as a template (see [https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template](Creating a repository from a template)).
+2. Create a new repository using your [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) fork as a template (see Creating a repository from a template).
 3. Clone your repository on your local machine (e.g. `git clone ...`)
 4. Open you repository in your IDE that supports devcontainers and ensure you project is opened within a devcontainer
 5. Execute the [install-templates.sh](https://github.com/pmalacho-mit/subrepo-dependency-management/blob/main/scripts/install-templates.sh) script from a terminal within your devcontainer
