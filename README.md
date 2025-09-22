@@ -14,6 +14,9 @@ In addition to [git](https://git-scm.com/)...
 
 ### Consuming a Dependency
 
+Assuming you're operating in a devcontainer that has [git-subrepo]() installed (if not, you can manually add this [git-subrepo feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo) to your `.devcontainer/devcontainer.json` file):
+
+1. Use the `git subrepo clone` command to clone the `dist` branch of your dependency repository into a location of your choosing.
 
 ```bash
 git subrepo clone --branch dist <repo URL> <destination>
