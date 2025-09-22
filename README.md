@@ -63,8 +63,9 @@ git subrepo push <path-to-dependency>
 This will do two things:
 
 1. <u>Immediately</u> make your changes available to any consumer that follows the [upgrading instructions]()
-   - **NOTE:** Because these changes are immediately available, any large and/or breaking changes should instead be accomplished via the [maintaing a dependency guidance]().
-3. Kick off the [subrepo-pull-into-main]() github action, which will create a pull request of your changes into the `main` branch. That way, your changes can be easily reviewed and tested (and potentially rolled back, if necessary). See more in [maintaing a dependency]().
+2. Kick off the [subrepo-pull-into-main]() github action, which will create a pull request of your changes into the `main` branch. That way, your changes can be easily reviewed and tested (and potentially rolled back, if necessary). See more in [maintaing a dependency]().
+
+> **NOTE:** Because these changes are immediately available, any large and/or breaking changes should instead be accomplished via the [maintaing a dependency guidance]().
 
 ### Creating a Dependency
 
