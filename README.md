@@ -24,9 +24,9 @@ git subrepo clone --branch dist <repo URL> <destination>
 
 For example: `git subrepo clone --branch dist git@github.com:my-username/my-repo.git ./my-dependency`
 
-### Upgrading a Dependency (i.e. `pull`ing)
+#### Upgrading (i.e. `pull`ing)
  
-### Modifying a Dependency (i.e. `push`ing)
+#### Modifying (i.e. `push`ing)
 
 ### Creating a Dependency
 
