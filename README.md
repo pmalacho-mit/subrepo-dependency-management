@@ -20,14 +20,11 @@ It is also highly recommended to use:
 
 ### Consuming a Dependency
 
-1. Confirm that your system has the `git subrepo` command available:
+1. Confirm that your environment has the `git subrepo` command available. If not, see [instructions on installing git-subrepo]().
 
 ```bash
 git subrepo --version
 ```
-- If **NOT**:
-  - (**RECOMMENDED**) Use a [devcontainer](https://containers.dev/) with a `.devcontainer/devcontainer.json` file that includes [git-subrepo as a feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo)
-  - Install `git subrepo` according their [installation documentation](https://github.com/ingydotnet/git-subrepo?tab=readme-ov-file#installation)
 
 2. Use the `git subrepo clone` command to clone the `dist` branch of your dependency repository into a location of your choosing.
 
@@ -47,17 +44,23 @@ git subrepo clone --branch dist <repo URL> <destination>
 
 ### Creating a Dependency
 
-1. If you haven't already, fork [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) and configure it as a template (see [Creating a template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)). 
-2. Create a new repository using your [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) fork as a template (see [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)).
-3. Clone your repository on your local machine (e.g. `git clone ...`)
-4. Open the repository in an IDE that supports devcontainers, and then startup the devcontainer
-5. Execute the [install-templates.sh](https://github.com/pmalacho-mit/subrepo-dependency-management/blob/main/scripts/install-templates.sh) script from a terminal within your devcontainer
+Follow the below steps when setting up a codebase that will behave as a dependency for one or more "consumer" projects.
+
+1. Create a new github repository to contain your dependency's source code.
+  - (**RECOMMENDED**) Follow [initializing a repository with git subrepo devcontainer support]()
+2. Open your repository in an environment that has the `git subrepo` command available. If not, see [instructions on installing git-subrepo]().
+
+```
+git subrepo --version
+```
+
+3. Execute the [install-templates.sh](https://github.com/pmalacho-mit/subrepo-dependency-management/blob/main/scripts/install-templates.sh) script from a terminal within your devcontainer
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/scripts/install-templates.sh)"
 ```
 
-6. Update your repository's action settings (⚙️ Settings > ▶️ Actions > General) to enable:
+4. Update your repository's action settings (⚙️ Settings > ▶️ Actions > General) to enable:
 - Read and write permissions
 - Allow GitHub Actions to create and approve pull requests
 > <img width="755" height="349" alt="Screenshot 2025-09-21 at 3 20 02 PM" src="https://github.com/user-attachments/assets/0595ad07-1bbb-4421-a876-161b2f1b1c24" />
@@ -68,7 +71,15 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dep
 
 #### (RECOMMENDED) Within a devcontainer
 
+1. If you haven't already, fork [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) and configure it as a template (see [Creating a template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)). 
+2. Create a new repository using your [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) fork as a template (see [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)).
 
+Use a [devcontainer](https://containers.dev/) with a `.devcontainer/devcontainer.json` file that includes [git-subrepo as a feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo)
+
+##### Initializing a repository with `git subrepo` devcontainer support
+
+1. Fork [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) and configure it as a template (see [Creating a template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)). 
+2. Create a new repository using your [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) fork as a template (see [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)).
 
 #### On your system
 
