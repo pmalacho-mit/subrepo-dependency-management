@@ -97,10 +97,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dep
 
 ### Install [git-subrepo](https://github.com/ingydotnet/git-subrepo) 
 
-#### (RECOMMENDED) Within a devcontainer
-
-1. If you haven't already, fork [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) and configure it as a template (see [Creating a template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)). 
-2. Create a new repository using your [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) fork as a template (see [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)).
+#### Within a devcontainer (***RECOMMENDED***) 
 
 Use a [devcontainer](https://containers.dev/) with a `.devcontainer/devcontainer.json` file that includes [git-subrepo as a feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo)
 
