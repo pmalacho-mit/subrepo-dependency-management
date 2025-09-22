@@ -1,8 +1,8 @@
 # subrepo-dependency-management (Suede Man)
 
-> That's nice, like suede, man.
+> That's nice... Like suede, man.
 > 
-> -- <cite>You, hopefully (after using this workflow)</cite>
+> — <cite><em>You, hopefully (after using this workflow)</em></cite>
 
 A workflow that relies on [git-subrepo](https://github.com/ingydotnet/git-subrepo) for project dependency management, especially when the dependency is a codebase you manage. 
 
