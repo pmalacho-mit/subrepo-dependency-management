@@ -25,7 +25,7 @@ It is also highly recommended to use:
 ```bash
 git subrepo --version
 ```
- - If **NOT**:
+- If **NOT**:
   - (**RECOMMENDED**) Use a [devcontainer]() with a `.devcontainer/devcontainer.json` file that includes [git-subrepo as a feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo)
   - Install `git subrepo` according their [installation documentation](https://github.com/ingydotnet/git-subrepo?tab=readme-ov-file#installation)
 
