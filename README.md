@@ -1,4 +1,4 @@
-# subrepo-dependency-management (Suede Man)
+# subrepo-dependency-management (_Suede_ or _Suede Man_)
 
 > That's nice... Like <ins>suede</ins>, <ins>man</ins>.
 > 
