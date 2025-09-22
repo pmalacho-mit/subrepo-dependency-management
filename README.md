@@ -79,11 +79,12 @@ Follow the below steps when setting up a codebase that will behave as a dependen
 git subrepo --version
 ```
 
-3. Execute the [install-templates.sh](https://github.com/pmalacho-mit/subrepo-dependency-management/blob/main/scripts/install-templates.sh) script from a terminal within your devcontainer
+3. Execute the [install-templates.sh](https://github.com/pmalacho-mit/subrepo-dependency-management/blob/main/scripts/install-templates.sh) script
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/scripts/install-templates.sh)"
 ```
+> **NOTE:** If you're [relying on git subrepo within a devcontainer](), make sure to execute the above command from within a terminal tied to the devcontainer.
 
 4. Update your repository's action settings (⚙️ Settings > ▶️ Actions > General) to enable:
    - Read and write permissions
