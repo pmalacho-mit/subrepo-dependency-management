@@ -24,6 +24,10 @@ git subrepo clone --branch dist <repo URL> <destination>
 
 For example: `git subrepo clone --branch dist git@github.com:my-username/my-repo.git ./my-dependency`
 
+### Upgrading a Dependency (i.e. `pull`ing)
+ 
+### Modifying a Dependency (i.e. `push`ing)
+
 ### Creating a Dependency
 
 1. If you haven't already, fork [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) and configure it as a template (see [Creating a template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)). 
@@ -41,6 +45,4 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dep
 - Allow GitHub Actions to create and approve pull requests
 > <img width="755" height="349" alt="Screenshot 2025-09-21 at 3 20 02 PM" src="https://github.com/user-attachments/assets/0595ad07-1bbb-4421-a876-161b2f1b1c24" />
 
-### Upgrading a Dependency (i.e. `pull`ing)
- 
-### Modifying a Dependency (i.e. `push`ing)
+
