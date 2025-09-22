@@ -47,7 +47,7 @@ git subrepo clone --branch dist <repo URL> <destination>
 Follow the below steps when setting up a codebase that will behave as a dependency for one or more "consumer" projects.
 
 1. Create a new github repository to contain your dependency's source code.
-  - (**RECOMMENDED**) Follow [initializing a repository with git subrepo devcontainer support]()
+   - (**RECOMMENDED**) Follow [initializing a repository with git subrepo devcontainer support]()
 2. Open your repository in an environment that has the `git subrepo` command available. If not, see [instructions on installing git-subrepo]().
 
 ```
