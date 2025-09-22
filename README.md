@@ -14,9 +14,9 @@ In addition to [git](https://git-scm.com/)...
 
 ### Consuming a Dependency
 
-Assuming you're operating in a devcontainer that has [git-subrepo]() installed (if not, you can manually add this [git-subrepo feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo) to your `.devcontainer/devcontainer.json` file):
+1. Assuming you're operating in a devcontainer that has [git-subrepo]() installed (if not, you can manually add this [git-subrepo feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo) to your `.devcontainer/devcontainer.json` file):
 
-1. Use the `git subrepo clone` command to clone the `dist` branch of your dependency repository into a location of your choosing.
+2. Use the `git subrepo clone` command to clone the `dist` branch of your dependency repository into a location of your choosing.
 
 ```bash
 git subrepo clone --branch dist <repo URL> <destination>
@@ -29,7 +29,7 @@ For example: `git subrepo clone --branch dist git@github.com:my-username/my-repo
 1. If you haven't already, fork [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) and configure it as a template (see [Creating a template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)). 
 2. Create a new repository using your [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) fork as a template (see [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)).
 3. Clone your repository on your local machine (e.g. `git clone ...`)
-4. Open you repository in your IDE that supports devcontainers and ensure you project is opened within a devcontainer
+4. Open the repository in an IDE that supports devcontainers, and then startup the devcontainer
 5. Execute the [install-templates.sh](https://github.com/pmalacho-mit/subrepo-dependency-management/blob/main/scripts/install-templates.sh) script from a terminal within your devcontainer
 
 ```bash
