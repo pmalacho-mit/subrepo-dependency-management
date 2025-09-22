@@ -1,6 +1,6 @@
 # subrepo-dependency-management (Suede Man)
 
-> That's nice... Like suede, man.
+> That's nice... Like <u>suede, man</u>.
 > 
 > — <cite><em><strong>You,</strong> hopefully</em> (after using this workflow)</cite>
 
@@ -26,7 +26,7 @@ It is also highly recommended to use:
 git subrepo --version
 ```
 - If **NOT**:
-  - (**RECOMMENDED**) Use a [devcontainer]() with a `.devcontainer/devcontainer.json` file that includes [git-subrepo as a feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo)
+  - (**RECOMMENDED**) Use a [devcontainer](https://containers.dev/) with a `.devcontainer/devcontainer.json` file that includes [git-subrepo as a feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo)
   - Install `git subrepo` according their [installation documentation](https://github.com/ingydotnet/git-subrepo?tab=readme-ov-file#installation)
 
 2. Use the `git subrepo clone` command to clone the `dist` branch of your dependency repository into a location of your choosing.
@@ -62,4 +62,14 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dep
 - Allow GitHub Actions to create and approve pull requests
 > <img width="755" height="349" alt="Screenshot 2025-09-21 at 3 20 02 PM" src="https://github.com/user-attachments/assets/0595ad07-1bbb-4421-a876-161b2f1b1c24" />
 
+## Prequisites
 
+### Install [git-subrepo](https://github.com/ingydotnet/git-subrepo) 
+
+#### (RECOMMENDED) Within a devcontainer
+
+
+
+#### On your system
+
+Install `git subrepo` on your system according to their [installation instructions](https://github.com/ingydotnet/git-subrepo?tab=readme-ov-file#installation).
