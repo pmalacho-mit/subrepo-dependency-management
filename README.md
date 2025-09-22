@@ -14,7 +14,7 @@ In addition to [git](https://git-scm.com/)...
 - [github actions](https://github.com/features/actions): Enables us to keep our remote subrepo dependency branches (`main` and `dist`) up to date.
 
 It is also highly recommended to use:
-- [devcontainer](https://containers.dev/): Enables us to easily spin up a development environment that has [git-subrepo installed as a feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo).
+- [devcontainers](https://containers.dev/): Enables us to easily spin up a development environment that has [git-subrepo installed as a feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo).
 
 ## Workflow
 
