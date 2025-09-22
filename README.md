@@ -24,6 +24,10 @@ git subrepo clone --branch dist <repo URL> <destination>
 
 > For example: `git subrepo clone --branch dist git@github.com:my-username/my-repo.git ./my-dependency`
 
+3. From here, you are in control of how your dependency's source code is used in your project. Consider:
+ - Using symlinks:
+ - Create a typescript alias:
+
 #### Upgrading (i.e. `pull`ing)
  
 #### Modifying (i.e. `push`ing)
