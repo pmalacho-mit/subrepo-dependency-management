@@ -11,14 +11,23 @@ A workflow that relies on [git-subrepo](https://github.com/ingydotnet/git-subrep
 In addition to [git](https://git-scm.com/)...
 
 - [git-subrepo](https://github.com/ingydotnet/git-subrepo): Enables us to more easily include git repositories as project dependencies (as compared to [git submodules](https://www.atlassian.com/git/tutorials/git-submodule) and/or [subtrees](https://www.atlassian.com/git/tutorials/git-subtree))  
-- [devcontainer](https://containers.dev/): Enables us to easily spin up a development environment that has [git-subrepo](https://github.com/ingydotnet/git-subrepo) installed.
 - [github actions](https://github.com/features/actions): Enables us to keep our remote subrepo dependency branches (`main` and `dist`) up to date.
+
+It is also highly recommended to use:
+- [devcontainer](https://containers.dev/): Enables us to easily spin up a development environment that has [git-subrepo](https://github.com/ingydotnet/git-subrepo) installed.
 
 ## Workflow
 
 ### Consuming a Dependency
 
-1. Assuming you're operating in a devcontainer that has [git-subrepo]() installed (if not, you can manually add this [git-subrepo feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo) to your `.devcontainer/devcontainer.json` file):
+1. Confirm that your system has the `git subrepo` command available:
+
+```bash
+git subrepo --version
+```
+ - If **NOT**:
+  - (**RECOMMENDED**) Use a [devcontainer]() with a `.devcontainer/devcontainer.json` file that includes [git-subrepo as a feature](https://github.com/pmalacho-mit/devcontainer-features/tree/main/src/git-subrepo)
+  - Install `git subrepo` according their [installation documentation](https://github.com/ingydotnet/git-subrepo?tab=readme-ov-file#installation)
 
 2. Use the `git subrepo clone` command to clone the `dist` branch of your dependency repository into a location of your choosing.
 
