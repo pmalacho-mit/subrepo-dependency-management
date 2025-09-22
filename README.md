@@ -1,6 +1,6 @@
 # subrepo-dependency-management (Suede Man)
 
-> That's nice... Like <ins style="text-decoration: underline;">suede, man</ins>.
+> That's nice... Like <ins>suede, man</ins>.
 > 
 > — <cite><em><strong>You,</strong> hopefully</em> (after using this workflow)</cite>
 
