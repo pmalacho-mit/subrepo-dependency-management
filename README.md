@@ -20,7 +20,7 @@ It is also highly recommended to use:
 
 ### Consuming a Dependency
 
-1. Confirm that your environment has the `git subrepo` command available. If not, see [instructions on installing git-subrepo]().
+1. Confirm that your environment has the `git subrepo` command available. If not, see [instructions on installing git-subrepo](#install-git-subrepo).
 
 ```bash
 git subrepo --version
@@ -62,18 +62,18 @@ git subrepo push <path-to-dependency>
 
 This will do two things:
 
-1. <u>Immediately</u> make your changes available to any consumer that follows the [upgrading instructions]()
-2. Kick off the [subrepo-pull-into-main]() github action, which will create a pull request of your changes into the `main` branch. That way, your changes can be easily reviewed, tested, adjusted, and/or rolled-back, if necessary. See more in [maintaing a dependency]().
+1. <u>Immediately</u> make your changes available to any consumer that follows the [upgrading instructions](#upgrading-ie-pulling)
+2. Kick off the [subrepo-pull-into-main](https://github.com/pmalacho-mit/subrepo-dependency-management/blob/main/templates/dist/.github/workflows/subrepo-pull-into-main.yml) github action, which will create a pull request of your changes into the `main` branch. That way, your changes can be easily reviewed, tested, adjusted, and/or rolled-back, if necessary. See more in [maintaing a dependency](#maintaing-a-dependency).
 
-> **NOTE:** Because these changes are immediately available, any large and/or breaking changes should instead be accomplished via the [maintaing a dependency guidance]().
+> **NOTE:** Because these changes are immediately available, any large and/or breaking changes should instead be accomplished via the [maintaing a dependency](#maintaing-a-dependency) guidance.
 
 ### Creating a Dependency
 
 Follow the below steps when setting up a codebase that will behave as a dependency for one or more "consumer" projects.
 
 1. Create a new github repository to contain your dependency's source code.
-   - (**RECOMMENDED**) Follow [initializing a repository with git subrepo devcontainer support]()
-2. Open your repository in an environment that has the `git subrepo` command available. If not, see [instructions on installing git-subrepo]().
+   - (**RECOMMENDED**) Follow [initializing a repository with git subrepo devcontainer support](#initializing-a-repository-with-git-subrepo-devcontainer-support)
+2. Open your repository in an environment that has the `git subrepo` command available. If not, see [instructions on installing git-subrepo](#install-git-subrepo).
 
 ```
 git subrepo --version
