@@ -2,7 +2,7 @@
 
 > That's nice... Like suede, man.
 > 
-> — <cite><em>You, hopefully</em>(after using this workflow)</cite>
+> — <cite><em><strong>You,</strong> hopefully</em> (after using this workflow)</cite>
 
 A workflow that relies on [git-subrepo](https://github.com/ingydotnet/git-subrepo) for project dependency management, especially when the dependency is a codebase you manage. 
 
