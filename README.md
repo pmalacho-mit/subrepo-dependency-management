@@ -22,7 +22,7 @@ In addition to [git](https://git-scm.com/)...
 git subrepo clone --branch dist <repo URL> <destination>
 ```
 
-For example: `git subrepo clone --branch dist git@github.com:my-username/my-repo.git ./my-dependency`
+> For example: `git subrepo clone --branch dist git@github.com:my-username/my-repo.git ./my-dependency`
 
 #### Upgrading (i.e. `pull`ing)
  
