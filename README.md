@@ -14,6 +14,13 @@ In addition to [git](https://git-scm.com/)...
 
 ### Consuming a Dependency
 
+
+```bash
+git subrepo clone <repo URL> <destination>
+```
+
+> For example: `git subrepo clone git@github.com:my-username/my-repo.git ./my-dependency`
+
 ### Creating a Dependency
 
 1. If you haven't already, fork [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) and configure it as a template (see [Creating a template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)). 
