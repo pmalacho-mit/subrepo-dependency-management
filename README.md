@@ -39,8 +39,32 @@ git subrepo clone --branch dist <repo URL> <destination>
    - Create a typescript alias:
 
 #### Upgrading (i.e. `pull`ing)
+
+To get the latest changes for your dependency, simply run the `git subrepo pull` command, with the final argument being the location of your dependency.
+
+```
+git subrepo pull <path-to-dependency>
+```
+
+> For example: `git subrepo pull ./my-dependency`
  
 #### Modifying (i.e. `push`ing)
+
+Since this workflow treats your dependencies as source code within your project, you can freely modify a dependency's files, and track those changes in your top-level project's history (i.e., with the normal `git add` / `git commit` workflow).
+
+If you then want to make those changes available to all consumers of the dependency, you can simply run the `git subrepo push` command, with the final argument being the location of your dependency.
+
+```
+git subrepo push <path-to-dependency>
+```
+
+> For example: `git subrepo push ./my-dependency`
+
+This will do two things:
+
+1. <u>Immediately</u> make your changes available to any consumer that follows the [upgrading instructions]()
+   - **NOTE:** Because these changes are immediately available, any large and/or breaking changes should instead be accomplished via the [maintaing a dependency guidance]().
+3. Kick off the [subrepo-pull-into-main]() github action, which will create a pull request of your changes into the `main` branch. That way, your changes can be easily reviewed and tested (and potentially rolled back, if necessary). See more in [maintaing a dependency]().
 
 ### Creating a Dependency
 
@@ -64,6 +88,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dep
    - Read and write permissions
    - Allow GitHub Actions to create and approve pull requests
 > <img width="755" height="349" alt="Screenshot 2025-09-21 at 3 20 02 PM" src="https://github.com/user-attachments/assets/0595ad07-1bbb-4421-a876-161b2f1b1c24" />
+
+### Maintaing a Dependency
 
 ## Prequisites
 
