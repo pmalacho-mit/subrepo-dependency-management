@@ -19,7 +19,7 @@ In addition to [git](https://git-scm.com/)...
 git subrepo clone <repo URL> <destination>
 ```
 
-> For example: `git subrepo clone git@github.com:my-username/my-repo.git ./my-dependency`
+For example: `git subrepo clone git@github.com:my-username/my-repo.git ./my-dependency`
 
 ### Creating a Dependency
 
