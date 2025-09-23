@@ -108,6 +108,9 @@ if [[ -d "dist" && -n "$(ls -A dist 2>/dev/null)" ]]; then
   echo "Error: './dist' already exists and is not empty. Remove it or choose another directory before running." >&2
   exit 1
 fi
+
 git subrepo clone --branch=dist "$ORIGIN_URL" dist
+echo "Pushing 'main'..."
+git push -u origin main
 
 echo "[9/9] Done."
