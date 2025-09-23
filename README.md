@@ -95,6 +95,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dep
 
 ### Maintaing a Dependency
 
+... todo ...
+
 ## Prequisites
 
 ### Install [git-subrepo](https://github.com/ingydotnet/git-subrepo) 
