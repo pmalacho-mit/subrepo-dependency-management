@@ -2,7 +2,7 @@
 
 Su<sub>br</sub>e<sub>po</sub>de<sub>pendency</sub>, man<sub>nagement</sub>.
 
-> That's nice... Like <ins>su<sub>br</sub>e<sub>po</sub>de<sub>pendency</sub></ins>, <ins>man<sub>nagement</sub></ins>.
+> That's nice... Like <ins>suede</ins>, <ins>man</ins>.
 > 
 > — <cite><em><strong>You,</strong> hopefully</em> (after using this workflow)</cite>
 
