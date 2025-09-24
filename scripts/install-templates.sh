@@ -3,8 +3,8 @@ set -euo pipefail
 
 # --- Config: template file URLs ---
 MAIN_DEVCONTAINER_URL="https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/templates/main/.devcontainer/devcontainer.json"
-MAIN_WORKFLOW_URL="https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/templates/main/.github/workflows/subrepo-push-dist.yml"
-DIST_WORKFLOW_URL="https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/templates/dist/.github/workflows/subrepo-pull-into-main.yml"
+MAIN_WORKFLOW_URL="https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/templates/dependency/main/.github/workflows/subrepo-push-dist.yml"
+DIST_WORKFLOW_URL="https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/templates/dependency/dist/.github/workflows/subrepo-pull-into-main.yml"
 
 echo "[1/9] Checking prerequisites..."
 if ! command -v git >/dev/null 2>&1; then
