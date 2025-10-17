@@ -8,6 +8,8 @@ Su<sub>br</sub>e<sub>po</sub>de<sub>pendency</sub>, man<sub>nagement</sub>.
 
 A workflow that relies on [git-subrepo](https://github.com/ingydotnet/git-subrepo) for project dependency management, especially when the dependency is a codebase you manage. 
 
+Not convinced? Jump down to [why](#why).
+
 ## Stack
 
 In addition to [git](https://git-scm.com/)...
@@ -115,3 +117,7 @@ If you haven't worked with devcontainers before, checkout this [tutorial](https:
 #### On your system
 
 Install `git subrepo` on your system according to their [installation instructions](https://github.com/ingydotnet/git-subrepo?tab=readme-ov-file#installation).
+
+## Why
+
+... todo ...
