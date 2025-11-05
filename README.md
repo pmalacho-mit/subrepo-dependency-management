@@ -113,7 +113,7 @@ If you haven't worked with devcontainers before, checkout this [tutorial](https:
 
 1. Fork [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) and configure it as a template (see [Creating a template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)). 
 2. Create a new repository using your [git-subrepo-devcontainer-template](https://github.com/pmalacho-mit/git-subrepo-devcontainer-template) fork as a template (see [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)).
-> <img width="380" height="356" alt="Screenshot 2025-11-04 at 11 26 34 PM" src="https://github.com/user-attachments/assets/68ef7c01-92b1-4db3-b31a-c86925a073f5" />
+> <img width="500" alt="Screenshot 2025-11-04 at 11 26 34 PM" src="https://github.com/user-attachments/assets/68ef7c01-92b1-4db3-b31a-c86925a073f5" />
 
 
 #### On your system
