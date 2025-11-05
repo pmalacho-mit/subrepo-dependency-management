@@ -29,7 +29,7 @@ REPO_NAME="$(basename "$(git rev-parse --show-toplevel)")"
 # Humanize: replace -/_ with spaces, then Title Case
 REPO_NAME_READABLE="$(
   printf '%s\n' "$REPO_NAME" \
-  | tr '-_' ' ' \
+  | tr '[-_]' ' ' \
   | awk '{ for (i=1;i<=NF;i++) { $i=toupper(substr($i,1,1)) substr($i,2) } print }'
 )"
 log "Detected repo name: $REPO_NAME (readable: $REPO_NAME_READABLE)"
