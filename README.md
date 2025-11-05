@@ -1,6 +1,6 @@
-# _Suede_: subrepo-based dependency-management
+# _suede_: [git-subrepo](https://github.com/ingydotnet/git-subrepo) based dependency management
 
-***Su***<sub>br</sub>***e***<sub>po-based</sub> ***de***<sub>pendency-management</sub>
+<sub>git-</sub>***Su***<sub>br</sub>***e***<sub>po based</sub> ***de***<sub>pendency management</sub>
 
 > That's nice... Like <ins>suede</ins>, <ins>man</ins>.
 > 
