@@ -20,7 +20,6 @@ set -euo pipefail
 
 ROOT="$PWD"
 README="$ROOT/README.md"
-TMP_FILE="$(mktemp)"
 
 log() { printf '[generate-install-md] %s\n' "$*"; }
 
@@ -89,7 +88,7 @@ log "SSH URL:   $SSH_URL"
 DEST_PATH="./$REPO_NAME"
 
 # Build the new content
-cat > "$TMP_FILE" <<EOF
+cat > "$README" <<EOF
 # $REPO_NAME_READABLE
 
 ## Installation (SSH)
@@ -104,15 +103,4 @@ git subrepo clone --branch dist $HTTPS_URL $DEST_PATH
 
 EOF
 
-# Append old README content, if any
-if [[ -f "$README" ]]; then
-  log "Found existing README.md, appending original content"
-  cat "$README" >> "$TMP_FILE"
-else
-  log "No existing README.md found, creating new one"
-fi
 
-# Replace README.md with the new combined content
-mv "$TMP_FILE" "$README"
-log "Updated $README with installation instructions (prepended)."
-log "Done."
