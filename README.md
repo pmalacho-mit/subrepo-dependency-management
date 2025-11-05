@@ -1,4 +1,4 @@
-# subrepo-dependency-management (_Suede_)
+# _Suede / Suede Man_: subrepo-dependency-management
 
 Su<sub>br</sub>e<sub>po</sub>de<sub>pendency</sub>, man<sub>nagement</sub>.
 
