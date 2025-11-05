@@ -1,4 +1,4 @@
-# _suede_: [git-subrepo](https://github.com/ingydotnet/git-subrepo) based dependency management
+# <u>_suede_</u>: [git-subrepo](https://github.com/ingydotnet/git-subrepo) based dependency management
 
 <sub>git-</sub>***Su***<sub>br</sub>***e***<sub>po based</sub> ***de***<sub>pendency management</sub>
 
