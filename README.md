@@ -2,7 +2,7 @@
 
 <sub>git-</sub>***Su***<sub>br</sub>***e***<sub>po based</sub> ***de***<sub>pendency management</sub>
 
-> That's nice... Like <ins>suede</ins>, <ins>man</ins>.
+> That's smooth... Like <ins>suede</ins>.
 > 
 > — <cite><em><strong>You,</strong> hopefully</em> (after using this workflow)</cite>
 
