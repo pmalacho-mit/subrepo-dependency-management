@@ -1,6 +1,6 @@
-# _Suede (/ Suede Man_): subrepo-dependency-management
+# _Suede_: subrepo-based dependency-management
 
-Su<sub>br</sub>e<sub>po</sub>de<sub>pendency</sub>, man<sub>nagement</sub>.
+***Su***<sub>br</sub>***e***<sub>po-based</sub> ***de***<sub>pendency-management</sub>
 
 > That's nice... Like <ins>suede</ins>, <ins>man</ins>.
 > 
