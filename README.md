@@ -99,6 +99,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dep
 
 ... todo ...
 
+### Dependencies of Dependencies
+
+... todo ...
+
 ## Anatomy
 
 ### Dependency
