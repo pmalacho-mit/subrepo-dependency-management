@@ -86,17 +86,24 @@ log "HTTPS URL: $HTTPS_URL"
 log "SSH URL:   $SSH_URL"
 
 DEST_PATH="./$REPO_NAME"
+DIST_URL="${HTTPS_URL%.git}/tree/dist"
 
 # Build the new content
 cat > "$README" <<EOF
 # $REPO_NAME_READABLE
 
+This repo is a [suede dependency](https://github.com/pmalacho-mit/suede). 
+
+To see the installable source code, please checkout the [dist branch]($DIST_URL).
+
 ## Installation (SSH)
+
 \`\`\`bash
 git subrepo clone --branch dist $SSH_URL $DEST_PATH
 \`\`\`
 
 ## Installation (HTTPS)
+
 \`\`\`bash
 git subrepo clone --branch dist $HTTPS_URL $DEST_PATH
 \`\`\`
