@@ -35,7 +35,7 @@ case "$REMOTE" in
 esac
 
 # Parse owner/repo (strip optional .git)
-if [[ "$NORM" =~ ^github\.com[:/]+([^/]+)/([^/]+?)(?:\.git)?$ ]]; then
+if [[ "$NORM" =~ ^github\.com[:/]+([^/]+)/([^/]+)$ ]]; then
   OWNER="${BASH_REMATCH[1]}"
   REPO="${BASH_REMATCH[2]}"
   REPO="${REPO%.git}"
