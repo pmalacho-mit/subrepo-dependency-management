@@ -79,7 +79,7 @@ ACCEPT_HEADER=( -H "Accept: application/vnd.github+json" )
 api_get() {
   # $1: path like /repos/OWNER/REPO/branches/main
   curl -fsSL --connect-timeout 10 \
-    "${UA_HEADER[@]}" "${ACCEPT_HEADER[@]}" "${AUTH_HEADER[@]}" \
+    "${UA_HEADER[@]}" "${ACCEPT_HEADER[@]}" ${AUTH_HEADER[@]+"${AUTH_HEADER[@]}"} \
     "https://api.github.com$1"
 }
 
