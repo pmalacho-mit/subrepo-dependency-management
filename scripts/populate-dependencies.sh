@@ -17,22 +17,35 @@ log() { printf '[populate-deps] %s\n' "$*"; }
 mkdir -p "$DEST_DIR"
 log "Ensured destination directory: $DEST_DIR"
 
-# Copy .gitrepo files from immediate child directories (root-level folders only)
-# Skips 'dist' and '.git' folders.
-shopt -s nullglob dotglob
-for dir in "$ROOT"/*/ ; do
-  [[ -d "$dir" ]] || continue
-  base="$(basename "$dir")"
-  [[ "$base" == "dist" || "$base" == ".git" ]] && continue
+# Function to copy .gitrepo files from immediate child directories
+# Args: $1 = source directory to scan
+copy_gitrepo_files() {
+  local search_dir="$1"
+  [[ -d "$search_dir" ]] || return 0
+  
+  log "Scanning for .gitrepo files in: $search_dir"
+  shopt -s nullglob dotglob
+  for dir in "$search_dir"/*/ ; do
+    [[ -d "$dir" ]] || continue
+    local base="$(basename "$dir")"
+    
+    # Skip 'dist' and '.git' folders only when scanning from ROOT
+    if [[ "$search_dir" == "$ROOT" ]]; then
+      [[ "$base" == "dist" || "$base" == ".git" ]] && continue
+    fi
 
-  src="$dir/.gitrepo"
-  if [[ -f "$src" ]]; then
-    dst="$DEST_DIR/$base.gitrepo"
-    cp -f "$src" "$dst"
-    log "Copied $src -> $dst"
-  fi
-done
-shopt -u nullglob dotglob
+    local src="$dir/.gitrepo"
+    if [[ -f "$src" ]]; then
+      local dst="$DEST_DIR/$base.gitrepo"
+      cp -f "$src" "$dst"
+      log "Copied $src -> $dst"
+    fi
+  done
+  shopt -u nullglob dotglob
+}
+
+# Copy .gitrepo files from dist/.dependencies if it exists
+copy_gitrepo_files "$ROOT/dist/.dependencies"
 
 # Extract only "dependencies" from package.json, write to dist/.dependencies/package.json
 pkg_src="$ROOT/package.json"
