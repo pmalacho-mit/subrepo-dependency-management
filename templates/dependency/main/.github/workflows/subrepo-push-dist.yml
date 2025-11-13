@@ -20,7 +20,7 @@ jobs:
       - name: Populate dependency artifacts
         shell: bash
         run: |
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/your-org/your-repo/refs/heads/main/scripts/populate-dependencies.sh)"
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/scripts/populate-dependencies.sh)"
             
       - name: Install git-subrepo
         run: |

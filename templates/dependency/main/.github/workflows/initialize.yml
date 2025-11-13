@@ -49,3 +49,38 @@ jobs:
           git subrepo clone --branch=dist "$ORIGIN_URL" dist
           echo "Pushing 'main'..."
           git push -u origin main
+      - name: Populate README with installation details
+        shell: bash
+        run: |
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dependency-management/refs/heads/main/scripts/populate-readme-after-init.sh)"
+      - name: Commit and push updated README
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "$(git status --porcelain README.md)" ]]; then
+            git add README.md
+            git commit -m "chore(suede-init): update README after initialization"
+            git push
+          else
+            echo "No changes to README.md to commit."
+          fi
+      - name: Delete initialize action (aka this file)
+        shell: bash
+        run: |
+            set -euo pipefail
+            FILE=".github/workflows/initialize.yml"
+  
+            if [[ -f "$FILE" ]]; then
+              echo "Removing $FILE..."
+              git rm -f "$FILE"
+  
+              # Commit and push if there are staged changes
+              if [[ -n "$(git status --porcelain)" ]]; then
+                git commit -m "chore(suede-init): remove initialization workflow"
+                git push
+              else
+                echo "No changes to commit after removing $FILE."
+              fi
+            else
+              echo "File $FILE not found; nothing to delete."
+            fi
