@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   pull-to-main:
+    if: ${{ github.run_number > 1 }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
