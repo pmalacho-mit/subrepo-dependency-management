@@ -134,7 +134,7 @@ echo "Fetching from $URL ..."
 
 # ---- Fetch & extract ----
 curl -fLSS --retry 3 --connect-timeout 10 \
-  "${UA_HEADER[@]}" "${ACCEPT_HEADER[@]}" "${AUTH_HEADER[@]}" \
+  "${UA_HEADER[@]}" "${ACCEPT_HEADER[@]}" ${AUTH_HEADER[@]+"${AUTH_HEADER[@]}"} \
   "$URL" \
 | tar -xz --strip-components=1 -C "$DEST"
 
