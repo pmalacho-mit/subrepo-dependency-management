@@ -3,8 +3,7 @@
 # Script to extract information from a git‑subrepo .gitrepo file, download a
 # tarball of the referenced repository at a given commit and unpack it into
 # a destination directory.  The script supports safe defaults, explicit
-# command line parsing and optional destructive operations via --force and
-# symlink creation via --link.
+# command line parsing and optional symlink creation via --link.
 #
 # This script replaces the ad‑hoc curl/eval/degit invocation used to
 # bootstrap a subrepo archive.  It embeds the logic of both
@@ -16,20 +15,22 @@
 
 set -euo pipefail
 
+# ----- External Script Dependencies -----
+# These scripts are downloaded and executed at runtime.
+readonly EXTERNAL_SCRIPT_EXTRACT="https://raw.githubusercontent.com/pmalacho-mit/suede/refs/heads/main/scripts/extract-subrepo-config.sh"
+readonly EXTERNAL_SCRIPT_DEGIT="https://raw.githubusercontent.com/pmalacho-mit/suede/refs/heads/main/scripts/utils/degit.sh"
+
 # Print usage information to stderr.  This function is invoked when
 # incorrect flags are supplied or when --help is requested.
 usage() {
   cat >&2 <<'USAGE'
 Usage: add-subrepo-dependency.sh [OPTIONS] <path/to/file.gitrepo>
 
-Fetch and extract the repository specified in a git‑subrepo .gitrepo file.
+Fetch and extract the repository specified in a git subrepo .gitrepo file.
 
 Options:
   -d, --dest DIR    Destination directory to write into.  If omitted,
                     derive the destination from the given file.
-  -f, --force       Remove and recreate the destination if it already exists
-                    and contains files.  Without --force the script
-                    aborts when the destination is populated.
   -l, --link        After a successful extraction, create a symlink from the
                     destination directory back into the location of the
                     .gitrepo file.  The symlink is named after the base
@@ -39,7 +40,7 @@ Options:
 
 Notes:
   • The positional argument <path/to/file.gitrepo> must reference a valid
-    git‑subrepo metadata file.  It may be named `.gitrepo` (inside a
+    git subrepo metadata file.  It may be named `.gitrepo` (inside a
     subdirectory) or `<name>.gitrepo`.  The script uses the file name
     and/or its parent directory to determine a default destination when
     --dest is not provided.
@@ -74,7 +75,6 @@ is_dir_populated() {
 FILE=""
 DEST=""
 DEST_PROVIDED=false
-FORCE=false
 LINK=false
 
 # Process command line arguments.  We intentionally do not allow
@@ -90,10 +90,6 @@ while [[ $# -gt 0 ]]; do
         exit 1
       fi
       shift 2
-      ;;
-    -f|--force)
-      FORCE=true
-      shift
       ;;
     -l|--link)
       LINK=true
@@ -140,9 +136,8 @@ if [[ ! -f "$FILE" ]]; then
 fi
 
 # Parse the .gitrepo file.  This populates OWNER, REPO and COMMIT variables.
-EXTRACT="https://raw.githubusercontent.com/pmalacho-mit/suede/refs/heads/main/scripts/extract-subrepo-config.sh"
-eval "$(bash <(curl -fsSL ${EXTRACT}) ${FILE})"
-
+eval "$(bash <(curl -fsSL ${EXTERNAL_SCRIPT_EXTRACT}) ${FILE})"
+echo "Determined subrepo ref: ${OWNER}/${REPO}@${COMMIT}" >&2
 
 # Determine derived destination if not provided.  For
 # foo/bar/.gitrepo dest becomes foo/bar.  For foo/bar/name.gitrepo dest
@@ -156,6 +151,7 @@ if [[ -z "$DEST" ]]; then
     name_no_ext="${file_base%.gitrepo}"
     DEST="${file_dir}/${name_no_ext}"
   fi
+  echo "Auto-derived destination: $DEST" >&2
 fi
 
 # Canonicalise DEST to remove any trailing slashes.
@@ -163,36 +159,18 @@ DEST="${DEST%/}"
 
 # Check whether destination exists and is non‑empty.
 if is_dir_populated "$DEST"; then
-  if ! $FORCE; then
-    echo "Error: destination '$DEST' already exists and is not empty.  Use --force to overwrite." >&2
-    exit 1
-  fi
-  # Remove destination contents.  Be careful not to remove the parent when
-  # DEST is the directory containing the .gitrepo file because it may
-  # contain untracked files.  In such a case we remove everything except
-  # the .gitrepo file itself, which we will copy back later.  Otherwise
-  # remove the entire DEST directory.
-  if [[ "$DEST" == "$(dirname "$FILE")" ]]; then
-    # We're overwriting the current subrepo directory.  Remove everything
-    # except the .gitrepo file so that we don't lose the metadata.  We
-    # purposefully ignore failures here – if files disappear between
-    # scanning and removal we'll continue anyway.
-    for item in "$DEST"/* "$DEST"/.[!.]* "$DEST"/..?*; do
-      # Skip the gitrepo file we will preserve; it's located at FILE.
-      [[ "$item" == "$FILE" ]] && continue
-      rm -rf -- "$item" || true
-    done
-  else
-    rm -rf "$DEST"
-  fi
+  echo "Error: destination '$DEST' already exists and is not empty." >&2
+  exit 1
 fi
 
 # Ensure destination directory exists and is empty now.
 mkdir -p "$DEST"
 
-# Download and extract repository archive.  The archive will contain a
-# top-level directory owner-repo-<sha>, which we strip off.
-download_archive "$OWNER" "$REPO" "$COMMIT" "$DEST"
+# Download and extract repository archive.  
+bash <(curl -fsSL "$EXTERNAL_SCRIPT_DEGIT") \
+  --repo     "${OWNER}/${REPO}" \
+  --commit   "${COMMIT}" \
+  --directory "${DEST}"
 
 # Copy the .gitrepo file into the destination as `.gitrepo`.  Always
 # overwrite any existing copy.  Use cp -p to preserve timestamps and
@@ -202,25 +180,7 @@ cp -p "$FILE" "$DEST/.gitrepo"
 # Create optional symlink.  Only do this when the destination was
 # explicitly provided; for derived destinations we warn but do not link.
 if $LINK; then
-  # Check whether DEST was explicitly specified.  We compare the user
-  # supplied DEST (if any) against the derived value computed earlier.  If
-  # they match we treat it as derived and do not link.
-  dest_was_provided=true
-  # It's tricky to tell whether DEST came from a flag after we've normalised
-  # it.  We detect this by checking if the user passed the --dest flag; if
-  # so, the positional variable DEST will match the provided value when
-  # normalised.  We cannot introspect the original flag easily at this
-  # point, so as a compromise we treat the presence of --dest in the
-  # original arguments as determinative.  A more robust implementation
-  # would capture a separate variable.
-  # shellcheck disable=SC2199
-  for arg in "$@"; do
-    if [[ "$arg" == "-d" || "$arg" == "--dest" ]]; then
-      dest_was_provided=true
-      break
-    fi
-  done
-  if [[ "$DEST" == "$(dirname "$FILE")" ]] && [[ "$dest_was_provided" != true ]]; then
+  if [[ "$DEST" == "$(dirname "$FILE")" ]] && [[ "$DEST_PROVIDED" != true ]]; then
     echo "Warning: --link ignored because destination was derived from the .gitrepo file" >&2
   else
     # Determine the symlink name.  If the given file was `.gitrepo` then the
@@ -243,4 +203,5 @@ if $LINK; then
   fi
 fi
 
-echo "✓ Extracted ${OWNER}/${REPO}@${COMMIT} into ${DEST}" >&2
+echo "Extracted ${OWNER}/${REPO}@${COMMIT} into ${DEST}\nAdd and commit the changes to your repository, for example:" >&2
+echo "  git add ${DEST}\n  git commit -m 'Add subrepo ${OWNER}/${REPO}@${COMMIT}'" >&2
