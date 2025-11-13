@@ -31,6 +31,24 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
 
+      - name: Check if dist branch exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          ORIGIN_URL="$(git remote get-url origin 2>/dev/null || true)"
+          if [[ -z "$ORIGIN_URL" ]]; then
+            echo "Error: could not find 'origin' remote URL." >&2
+            exit 1
+          fi
+
+          if ! git ls-remote --heads "$ORIGIN_URL" dist | grep -q 'refs/heads/dist'; then
+            echo "Warning: 'dist' branch does not exist on $ORIGIN_URL" >&2
+            echo "The subrepo clone step will fail. You likely did not select 'Include all branches' when creating the repository from the dependency template." >&2
+            exit 1
+          else
+            echo "'dist' branch exists on $ORIGIN_URL"
+          fi
+
       - name: Create dist subrepo clone
         shell: bash
         run: |
