@@ -13,7 +13,7 @@ TEST_HARNESS_DIR="$(cd "$SCRIPTS_UTILS_TESTS_DIR/../../../.tests/harness" && pwd
 readonly EXTERNAL_SCRIPT_DEGIT="https://raw.githubusercontent.com/pmalacho-mit/suede/refs/heads/main/scripts/utils/degit.sh"
 readonly LOCAL_SCRIPT_DEGIT="$SCRIPTS_UTILS_TESTS_DIR/../degit.sh"
 
-
+source "$TEST_HARNESS_DIR/runner.sh"
 source "$TEST_HARNESS_DIR/mock-curl.sh"
 source "$TEST_HARNESS_DIR/color-logging.sh"
 source "$TEST_HARNESS_DIR/with-single-example-txt-file.sh"
@@ -40,41 +40,37 @@ cleanup_test_env() {
 basic_first_commit_test() {
   local destination="${TEST_DIR}/first-basic"
   mkdir -p "$destination"
-  bash <(curl -fsSL $EXTERNAL_SCRIPT_DEGIT) --repo "${OWNER}/${REPO}" --commit "${FIRST_COMMIT}" --directory "$destination"
-  assert_dir_has_expected_contents_for_commit "$destination" "$FIRST_COMMIT" "$FILE_CONTENTS_FIRST"
+  bash <(curl -fsSL $EXTERNAL_SCRIPT_DEGIT) --repo "${OWNER}/${REPO}" --commit "${COMMITS[0]}" --directory "$destination"
+  assert_dir_has_expected_contents_for_commit "$destination" 0
 }
 
 basic_second_commit_test() {
   local destination="${TEST_DIR}/second-basic"
   mkdir -p "$destination"
-  bash <(curl -fsSL $EXTERNAL_SCRIPT_DEGIT) --repo "${OWNER}/${REPO}" --commit "${SECOND_COMMIT}" --directory "$destination"
-  assert_dir_has_expected_contents_for_commit "$destination" "$SECOND_COMMIT" "$FILE_CONTENTS_SECOND"
+  bash <(curl -fsSL $EXTERNAL_SCRIPT_DEGIT) --repo "${OWNER}/${REPO}" --commit "${COMMITS[1]}" --directory "$destination"
+  assert_dir_has_expected_contents_for_commit "$destination" 1
 }
 
 force_test() {
   local destination="${TEST_DIR}/attempt-force"
+  local commit="${COMMITS[1]}"
   mkdir -p "$destination"
   touch "${destination}/extra-file.txt"
-  
-  $(bash <(curl -fsSL $EXTERNAL_SCRIPT_DEGIT) --repo "${OWNER}/${REPO}" --commit "${SECOND_COMMIT}" --directory "$destination") || {
+
+  $(bash <(curl -fsSL $EXTERNAL_SCRIPT_DEGIT) --repo "${OWNER}/${REPO}" --commit "$commit" --directory "$destination") || {
     log_pass "Degit correctly failed when attempting to write to non-empty directory."
   }
 
   rm -f "${destination}/extra-file.txt"
 
-  bash <(curl -fsSL $EXTERNAL_SCRIPT_DEGIT) --repo "${OWNER}/${REPO}" --commit "${SECOND_COMMIT}" --directory "$destination"
-   
-  assert_dir_has_expected_contents_for_commit "$destination" "$SECOND_COMMIT" "$FILE_CONTENTS_SECOND"
+  bash <(curl -fsSL $EXTERNAL_SCRIPT_DEGIT) --repo "${OWNER}/${REPO}" --commit "$commit" --directory "$destination"
+
+  assert_dir_has_expected_contents_for_commit "$destination" 1
 }
 
-main() {
-  trap cleanup_test_env EXIT
-  setup_test_env
-  basic_first_commit_test
-  basic_second_commit_test
+run_test_suite \
+  --setup setup_test_env \
+  --cleanup cleanup_test_env \
+  basic_first_commit_test \
+  basic_second_commit_test \
   force_test
-  exit $?
-}
-
-main "$@"
-

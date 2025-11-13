@@ -85,7 +85,7 @@ while [[ $# -gt 0 ]]; do
       DEST="${2-}"
       DEST_PROVIDED=true
       if [[ -z "$DEST" ]]; then
-        echo "Error: missing argument to $1" >&2
+        printf "Error: missing argument to %s\n" "$1" >&2
         usage
         exit 1
       fi
@@ -104,7 +104,7 @@ while [[ $# -gt 0 ]]; do
       break
       ;;
     -*)
-      echo "Unknown option: $1" >&2
+      printf "Unknown option: %s\n" "$1" >&2
       usage
       exit 1
       ;;
@@ -114,7 +114,7 @@ while [[ $# -gt 0 ]]; do
         FILE="$1"
         shift
       else
-        echo "Error: multiple file paths provided (got '$FILE' and '$1')" >&2
+        printf "Error: multiple file paths provided (got '%s' and '%s')\n" "$FILE" "$1" >&2
         usage
         exit 1
       fi
@@ -124,20 +124,20 @@ done
 
 # Validate required positional argument.
 if [[ -z "$FILE" ]]; then
-  echo "Error: a path to a .gitrepo file is required" >&2
+  printf "Error: a path to a .gitrepo file is required\n" >&2
   usage
   exit 1
 fi
 
 # Ensure the specified file exists.
 if [[ ! -f "$FILE" ]]; then
-  echo "Error: file '$FILE' not found" >&2
+  printf "Error: file '%s' not found\n" "$FILE" >&2
   exit 1
 fi
 
 # Parse the .gitrepo file.  This populates OWNER, REPO and COMMIT variables.
 eval "$(bash <(curl -fsSL ${EXTERNAL_SCRIPT_EXTRACT}) ${FILE})"
-echo "Determined subrepo ref: ${OWNER}/${REPO}@${COMMIT}" >&2
+printf "Determined subrepo ref: %s/%s@%s\n" "${OWNER}" "${REPO}" "${COMMIT}" >&2
 
 # Determine derived destination if not provided.  For
 # foo/bar/.gitrepo dest becomes foo/bar.  For foo/bar/name.gitrepo dest
@@ -151,7 +151,7 @@ if [[ -z "$DEST" ]]; then
     name_no_ext="${file_base%.gitrepo}"
     DEST="${file_dir}/${name_no_ext}"
   fi
-  echo "Auto-derived destination: $DEST" >&2
+  printf "Auto-derived destination: %s\n" "$DEST" >&2
 fi
 
 # Canonicalise DEST to remove any trailing slashes.
@@ -159,7 +159,7 @@ DEST="${DEST%/}"
 
 # Check whether destination exists and is non‑empty.
 if is_dir_populated "$DEST"; then
-  echo "Error: destination '$DEST' already exists and is not empty." >&2
+  printf "Error: destination '%s' already exists and is not empty.\n" "$DEST" >&2
   exit 1
 fi
 
@@ -181,7 +181,7 @@ cp -p "$FILE" "$DEST/.gitrepo"
 # explicitly provided; for derived destinations we warn but do not link.
 if $LINK; then
   if [[ "$DEST" == "$(dirname "$FILE")" ]] && [[ "$DEST_PROVIDED" != true ]]; then
-    echo "Warning: --link ignored because destination was derived from the .gitrepo file" >&2
+    printf "Warning: --link ignored because destination was derived from the .gitrepo file\n" >&2
   else
     # Determine the symlink name.  If the given file was `.gitrepo` then the
     # symlink name is the parent directory name.  Otherwise use the base
@@ -199,9 +199,9 @@ if $LINK; then
       rm -rf "$link_path"
     fi
     ln -s "$DEST" "$link_path"
-    echo "Created symlink: $link_path -> $DEST" >&2
+    printf "Created symlink: %s -> %s\n" "$link_path" "$DEST" >&2
   fi
 fi
 
-echo "Extracted ${OWNER}/${REPO}@${COMMIT} into ${DEST}\nAdd and commit the changes to your repository, for example:" >&2
-echo "  git add ${DEST}\n  git commit -m 'Add subrepo ${OWNER}/${REPO}@${COMMIT}'" >&2
+printf "Extracted %s/%s@%s into %s\nAdd and commit the changes to your repository, for example:\n" "${OWNER}" "${REPO}" "${COMMIT}" "${DEST}" >&2
+printf "  git add %s\n  git commit -m 'Add subrepo %s/%s@%s'\n" "${DEST}" "${OWNER}" "${REPO}" "${COMMIT}" >&2
