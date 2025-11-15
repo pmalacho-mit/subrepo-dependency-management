@@ -45,7 +45,7 @@ copy_gitrepo_files() {
 }
 
 # Copy .gitrepo files from dist/.dependencies if it exists
-copy_gitrepo_files "$ROOT/dist/.dependencies"
+copy_gitrepo_files "$ROOT"
 
 # Extract only "dependencies" from package.json, write to dist/.dependencies/package.json
 pkg_src="$ROOT/package.json"
