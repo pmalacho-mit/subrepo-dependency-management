@@ -34,7 +34,7 @@ copy_gitrepo_files() {
       [[ "$base" == "dist" || "$base" == ".git" ]] && continue
     fi
 
-    local src="$dir/.gitrepo"
+    local src="$dir.gitrepo"
     if [[ -f "$src" ]]; then
       local dst="$DEST_DIR/$base.gitrepo"
       cp -f "$src" "$dst"
