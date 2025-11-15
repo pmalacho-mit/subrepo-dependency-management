@@ -99,6 +99,14 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/pmalacho-mit/subrepo-dep
 
 ... todo ...
 
+#### On `subrepo-push-dist` failure
+
+`git subrepo pull dist`
+should fail and then follow prompts
+after `git subrepo commit dist` simply `git push`
+a new run will be triggered which should succeed
+
+
 ### Dependencies of Dependencies
 
 ... todo ...
